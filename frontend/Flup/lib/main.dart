@@ -1,8 +1,6 @@
-import 'dart:ffi';
-
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,20 +26,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-  var current = WordPair.random();
-  var favorites = <WordPair>[];
+  List<Expense> expenses = [];
 
-  void toggleFavorite() {
-    if (favorites.contains(current)) {
-      favorites.remove(current);
-    } else {
-      favorites.add(current);
-    }
-    notifyListeners();
-  }
-
-  void getNext() {
-    current = WordPair.random();
+  void removeExpense(Expense expense) {
+    expenses.remove(expense);
     notifyListeners();
   }
 }
@@ -59,10 +47,10 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = GeneratorPage();
+        page = AddPage();
         break;
       case 1:
-        page = FavoritesPage();
+        page = ExpensesPage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
@@ -77,12 +65,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 extended: constraints.maxWidth >= 600,
                 destinations: [
                   NavigationRailDestination(
-                    icon: Icon(Icons.home),
-                    label: Text('Home'),
+                    icon: Icon(Icons.add),
+                    label: Text('Add'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.favorite),
-                    label: Text('Favorites'),
+                    icon: Icon(Icons.attach_money),
+                    label: Text('Expenses'),
                   ),
                 ],
                 selectedIndex: selectedIndex,
@@ -106,90 +94,95 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class FavoritesPage extends StatelessWidget {
+class ExpensesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    var favorites = appState.favorites;
 
-    return Center(
-        child: ListView.builder(
-            itemCount: favorites.length,
-            itemBuilder: (context, index) {
-              final item = favorites[index];
-              return ListTile(title: Text(item.asString));
-            }));
-  }
-}
-
-class GeneratorPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-    var pair = appState.current;
-
-    IconData icon;
-    if (appState.favorites.contains(pair)) {
-      icon = Icons.favorite;
-    } else {
-      icon = Icons.favorite_border;
+    if (appState.expenses.isEmpty) {
+      return Center(
+        child: Text('No expenses yet.'),
+      );
     }
 
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          BigCard(pair: pair),
-          SizedBox(height: 10),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {
-                  appState.toggleFavorite();
-                },
-                icon: Icon(icon),
-                label: Text('Like'),
-              ),
-              SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {
-                  appState.getNext();
-                },
-                child: Text('Next'),
-              ),
-            ],
+
+    return ListView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: Text('You have '
+              '${appState.expenses.length} expenses:'),
+        ),
+        for (var expense in appState.expenses)
+          ListTile(
+            leading: IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: (){
+                appState.removeExpense(expense);
+              },
           ),
+            title: Text('${expense.title} for ${expense.price} ${expense.currency} paid by ${expense.person}'),
+          ),
+      ],
+    );
+
+
+  }
+}
+
+class AddPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
+    final expenseController = TextEditingController();
+    final priceController = TextEditingController();
+
+    return Form(
+      child: Center(
+        child: FractionallySizedBox(
+          widthFactor: 0.8,
+      child: Column(
+        children: <Widget>[
+          TextFormField(
+            decoration: const InputDecoration(
+            hintText: 'What did you pay?',
+            labelText: 'Expense title',
+            ),
+            controller: expenseController,
+          ),
+          TextFormField(
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly
+            ],
+            decoration: const InputDecoration(
+              hintText: 'How much was it?',
+              labelText: 'Price',
+            ),
+            controller: priceController,
+          ),
+          SizedBox(height: 30),
+          ElevatedButton(
+            onPressed: () {
+              appState.expenses.add( Expense(int.parse(priceController.text) , expenseController.text ) );
+            },
+            child: Text('Add'),
+          ),
+          // Add TextFormFields and ElevatedButton here.
         ],
+      ),
+          ),
       ),
     );
   }
 }
 
-class BigCard extends StatelessWidget {
-  const BigCard({
-    super.key,
-    required this.pair,
-  });
 
-  final WordPair pair;
+class Expense {
+  int price = 0;
+  String title = "";
+  final currency = "CHF";
+  final person = "me";
 
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final style = theme.textTheme.displayMedium!.copyWith(
-      color: theme.colorScheme.onPrimary,
-    );
-    return Card(
-      color: theme.colorScheme.primary,
-      child: Padding(
-        padding: const EdgeInsets.all(40.0),
-        child: Text(
-          pair.asLowerCase,
-          style: style,
-          semanticsLabel: "${pair.first} ${pair.second}",
-        ),
-      ),
-    );
-  }
+  Expense(this.price, this.title);
 }
