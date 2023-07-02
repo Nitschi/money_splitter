@@ -6,6 +6,9 @@
       <excludeFolder url="file://$MODULE_DIR$/frontend/my_awesome_namer/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/frontend/my_awesome_namer/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/frontend/my_awesome_namer/build" />
+      <excludeFolder url="file://$MODULE_DIR$/frontend/Flup/build" />
+      <excludeFolder url="file://$MODULE_DIR$/frontend/Flup/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/frontend/Flup/.pub" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
