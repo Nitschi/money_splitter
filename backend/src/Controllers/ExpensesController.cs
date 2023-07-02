@@ -7,7 +7,7 @@ namespace src.Controllers;
 public class ExpensesController : ControllerBase
 {
     private readonly ILogger<ExpensesController> _log;
-    List<Expense> expenses = new List<Expense>();
+    static List<Expense> expenses = new List<Expense>();
 
     public ExpensesController(ILogger<ExpensesController> logger)
     {
@@ -23,6 +23,6 @@ public class ExpensesController : ControllerBase
     [HttpPost(Name = "AddExpense")]
     public ActionResult<Expense> AddExpense(Expense expense){
         expenses.Add(expense);
-        return CreatedAtAction(nameof(Expense), null);
+        return CreatedAtAction(nameof(AddExpense), null);
     }
 }
