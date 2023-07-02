@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_aweseome_namer_app/generated_code/lib/api.dart';
+import 'package:flup/generated_code/lib/api.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:openapi_generator_annotations/openapi_generator_annotations.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        title: 'Namer App',
+        title: 'Flup',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent),

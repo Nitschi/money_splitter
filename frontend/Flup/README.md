@@ -1,4 +1,4 @@
-# my_awesome_namer
+# flup
 
 A new Flutter project.
 
