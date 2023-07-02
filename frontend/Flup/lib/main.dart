@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  final expenses = ExpensesApi().getExpenses();
+void main() async {
+  final apiClient = ApiClient(basePath: 'http://localhost:55555');
+  final expenses = await ExpensesApi(apiClient).getExpenses();
+  print(expenses?[0].toString());
 
   runApp(MyApp());
 }
