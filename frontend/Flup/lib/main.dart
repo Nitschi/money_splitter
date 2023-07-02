@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flup/generated_code/lib/api.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:openapi_generator_annotations/openapi_generator_annotations.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   final expenses = ExpensesApi().getExpenses();
@@ -109,7 +109,6 @@ class ExpensesPage extends StatelessWidget {
       );
     }
 
-
     return ListView(
       children: [
         Padding(
@@ -121,16 +120,15 @@ class ExpensesPage extends StatelessWidget {
           ListTile(
             leading: IconButton(
               icon: Icon(Icons.delete),
-              onPressed: (){
+              onPressed: () {
                 appState.removeExpense(expense);
               },
-          ),
-            title: Text('${expense.title} for ${expense.price} ${expense.currency} paid by ${expense.person}'),
+            ),
+            title: Text(
+                '${expense.title} for ${expense.price} ${expense.currency} paid by ${expense.person}'),
           ),
       ],
     );
-
-
   }
 }
 
@@ -145,42 +143,42 @@ class AddPage extends StatelessWidget {
       child: Center(
         child: FractionallySizedBox(
           widthFactor: 0.8,
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: const InputDecoration(
-            hintText: 'What did you pay?',
-            labelText: 'Expense title',
-            ),
-            controller: expenseController,
-          ),
-          TextFormField(
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly
+          child: Column(
+            children: <Widget>[
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'What did you pay?',
+                  labelText: 'Expense title',
+                ),
+                controller: expenseController,
+              ),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ],
+                decoration: const InputDecoration(
+                  hintText: 'How much was it?',
+                  labelText: 'Price',
+                ),
+                controller: priceController,
+              ),
+              SizedBox(height: 30),
+              ElevatedButton(
+                onPressed: () {
+                  appState.expenses.add(Expense(
+                      int.parse(priceController.text), expenseController.text));
+                },
+                child: Text('Add'),
+              ),
+              // Add TextFormFields and ElevatedButton here.
             ],
-            decoration: const InputDecoration(
-              hintText: 'How much was it?',
-              labelText: 'Price',
-            ),
-            controller: priceController,
           ),
-          SizedBox(height: 30),
-          ElevatedButton(
-            onPressed: () {
-              appState.expenses.add( Expense(int.parse(priceController.text) , expenseController.text ) );
-            },
-            child: Text('Add'),
-          ),
-          // Add TextFormFields and ElevatedButton here.
-        ],
-      ),
-          ),
+        ),
       ),
     );
   }
 }
-
 
 class Expense {
   int price = 0;
@@ -193,7 +191,7 @@ class Expense {
 
 @Openapi(
     additionalProperties:
-    AdditionalProperties(pubName: 'test_api', pubAuthor: 'Johnny dep'),
+        AdditionalProperties(pubName: 'test_api', pubAuthor: 'Johnny dep'),
     inputSpecFile: 'lib/swaggers/swagger1.json',
     generatorName: Generator.dart,
     outputDirectory: 'lib/generated_code')
