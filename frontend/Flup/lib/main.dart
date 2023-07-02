@@ -1,7 +1,6 @@
-import 'package:flup/generated_code/lib/api.dart';
+import 'package:flup_openapi_lib/api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:openapi_generator_annotations/openapi_generator_annotations.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -188,11 +187,3 @@ class Expense {
 
   Expense(this.price, this.title);
 }
-
-@Openapi(
-    additionalProperties:
-        AdditionalProperties(pubName: 'test_api', pubAuthor: 'Johnny dep'),
-    inputSpecFile: 'lib/swaggers/swagger1.json',
-    generatorName: Generator.dart,
-    outputDirectory: 'lib/generated_code')
-class Example extends OpenapiGeneratorConfig {}

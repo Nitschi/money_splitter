@@ -1,8 +1,8 @@
-# test_api.model.Expense
+# flup_openapi_lib.model.Expense
 
 ## Load the model package
 ```dart
-import 'package:test_api/api.dart';
+import 'package:flup_openapi_lib/api.dart';
 ```
 
 ## Properties

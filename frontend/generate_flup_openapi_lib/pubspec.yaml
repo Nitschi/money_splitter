@@ -1,0 +1,18 @@
+name: generate_flup_openapi_lib
+description: Generates the flup_openapi_lib package
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 0.0.1+1
+
+environment:
+  sdk: '>=2.19.4 <4.0.0'
+
+dependencies:
+  # For openapi client generation
+  openapi_generator: ^4.10.0
+  openapi_generator_annotations: ^4.10.0
+  build_runner: ^2.3.3
+
+dev_dependencies:
+  lints: ^2.0.0

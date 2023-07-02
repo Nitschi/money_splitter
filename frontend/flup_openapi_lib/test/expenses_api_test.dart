@@ -8,25 +8,24 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'package:test_api/api.dart';
+import 'package:flup_openapi_lib/api.dart';
 import 'package:test/test.dart';
 
-// tests for Expense
+
+/// tests for ExpensesApi
 void main() {
-  // final instance = Expense();
+  // final instance = ExpensesApi();
 
-  group('test Expense', () {
-    // String description
-    test('to test the property `description`', () async {
+  group('tests for ExpensesApi', () {
+    //Future<Expense> addExpense({ Expense expense }) async
+    test('test addExpense', () async {
       // TODO
     });
 
-    // int amount
-    test('to test the property `amount`', () async {
+    //Future<List<Expense>> getExpenses() async
+    test('test getExpenses', () async {
       // TODO
     });
-
 
   });
-
 }

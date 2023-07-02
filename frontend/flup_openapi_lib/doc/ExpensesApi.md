@@ -1,8 +1,8 @@
-# test_api.api.ExpensesApi
+# flup_openapi_lib.api.ExpensesApi
 
 ## Load the API package
 ```dart
-import 'package:test_api/api.dart';
+import 'package:flup_openapi_lib/api.dart';
 ```
 
 All URIs are relative to *http://localhost*
@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 ### Example
 ```dart
-import 'package:test_api/api.dart';
+import 'package:flup_openapi_lib/api.dart';
 
 final api_instance = ExpensesApi();
 final expense = Expense(); // Expense | 
@@ -61,7 +61,7 @@ No authorization required
 
 ### Example
 ```dart
-import 'package:test_api/api.dart';
+import 'package:flup_openapi_lib/api.dart';
 
 final api_instance = ExpensesApi();
 

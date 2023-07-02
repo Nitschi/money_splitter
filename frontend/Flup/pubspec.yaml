@@ -14,11 +14,8 @@ dependencies:
 
   english_words: ^4.0.0
   provider: ^6.0.0
-  openapi_generator: ^4.10.0
-  openapi_generator_annotations: ^4.10.0
-  build_runner: ^2.3.3
-  intl: ^0.18.1
-  http: ^0.13.6
+  flup_openapi_lib:
+    path: ../flup_openapi_lib
 
 dev_dependencies:
   flutter_test:
