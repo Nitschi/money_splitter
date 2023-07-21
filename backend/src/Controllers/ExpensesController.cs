@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using src.Dtos;
 
 namespace src.Controllers;
 
@@ -7,7 +8,7 @@ namespace src.Controllers;
 public class ExpensesController : ControllerBase
 {
     private readonly ILogger<ExpensesController> _log;
-    static List<Expense> expenses = new List<Expense>();
+    static List<ExpenseDto> expenses = new List<ExpenseDto>();
 
     public ExpensesController(ILogger<ExpensesController> logger)
     {
@@ -15,13 +16,13 @@ public class ExpensesController : ControllerBase
     }
 
     [HttpGet(Name = "GetExpenses")]
-    public IEnumerable<Expense> Get()
+    public IEnumerable<ExpenseDto> Get()
     {
         return expenses;
     }
 
     [HttpPost(Name = "AddExpense")]
-    public ActionResult<Expense> AddExpense(Expense expense){
+    public ActionResult<ExpenseDto> AddExpense(ExpenseDto expense){
         expenses.Add(expense);
         return CreatedAtAction(nameof(AddExpense), null);
     }
