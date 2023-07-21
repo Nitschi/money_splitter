@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **addExpense**
-> Expense addExpense(expense)
+> ExpenseDto addExpense(expenseDto)
 
 
 
@@ -23,10 +23,10 @@ Method | HTTP request | Description
 import 'package:flup_openapi_lib/api.dart';
 
 final api_instance = ExpensesApi();
-final expense = Expense(); // Expense | 
+final expenseDto = ExpenseDto(); // ExpenseDto | 
 
 try {
-    final result = api_instance.addExpense(expense);
+    final result = api_instance.addExpense(expenseDto);
     print(result);
 } catch (e) {
     print('Exception when calling ExpensesApi->addExpense: $e\n');
@@ -37,11 +37,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **expense** | [**Expense**](Expense.md)|  | [optional] 
+ **expenseDto** | [**ExpenseDto**](ExpenseDto.md)|  | [optional] 
 
 ### Return type
 
-[**Expense**](Expense.md)
+[**ExpenseDto**](ExpenseDto.md)
 
 ### Authorization
 
@@ -55,7 +55,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getExpenses**
-> List<Expense> getExpenses()
+> List<ExpenseDto> getExpenses()
 
 
 
@@ -78,7 +78,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List<Expense>**](Expense.md)
+[**List<ExpenseDto>**](ExpenseDto.md)
 
 ### Authorization
 

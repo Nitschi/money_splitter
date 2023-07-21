@@ -277,26 +277,26 @@ packages:
     dependency: "direct main"
     description:
       name: openapi_generator
-      sha256: "0c1d9041346286c12b8b39a8c92dc08f1ec57058603e8f0a1625d4e2233ab822"
+      sha256: "58b39960e1b2a0a39b2f4f24c5a2ea6b388881f34b5d9905d8f9432f90498b76"
       url: "https://pub.dev"
     source: hosted
-    version: "4.10.0"
+    version: "4.11.0"
   openapi_generator_annotations:
     dependency: "direct main"
     description:
       name: openapi_generator_annotations
-      sha256: "7a65633ee36078717d6693268142f50c2e66f456edf9edd78454910ac06dcdef"
+      sha256: "6a46858a623076758198e94a94bdc797b1ba5260ab8544a61c809922014de44c"
       url: "https://pub.dev"
     source: hosted
-    version: "4.10.0"
+    version: "4.11.0"
   openapi_generator_cli:
     dependency: transitive
     description:
       name: openapi_generator_cli
-      sha256: bb2d5f533ec2ed9a5404cbf35aa077ead9fbe7983cda1d749bc5d18cd3bb18bf
+      sha256: c737a64e1ef01b382dab7b43bc04b04c4642b19bb12e9f2609dd9f7827c6016b
       url: "https://pub.dev"
     source: hosted
-    version: "4.10.0"
+    version: "4.11.0"
   package_config:
     dependency: transitive
     description:
@@ -373,10 +373,10 @@ packages:
     dependency: transitive
     description:
       name: stack_trace
-      sha256: c3c7d8edb15bee7f0f74debd4b9c5f3c2ea86766fe4178eb2a18eb30a0bdaed5
+      sha256: "73713990125a6d93122541237550ee3352a2d84baad52d375a4cad2eb9b7ce0b"
       url: "https://pub.dev"
     source: hosted
-    version: "1.11.0"
+    version: "1.11.1"
   stream_channel:
     dependency: transitive
     description:

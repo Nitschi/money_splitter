@@ -181,8 +181,10 @@ class ApiClient {
           return valueString == 'true' || valueString == '1';
         case 'DateTime':
           return value is DateTime ? value : DateTime.tryParse(value);
-        case 'Expense':
-          return Expense.fromJson(value);
+        case 'ExpenseDto':
+          return ExpenseDto.fromJson(value);
+        case 'PersonDto':
+          return PersonDto.fromJson(value);
         default:
           dynamic match;
           if (value is List && (match = _regList.firstMatch(targetType)?.group(1)) != null) {

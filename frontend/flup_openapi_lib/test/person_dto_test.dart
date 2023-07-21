@@ -11,18 +11,18 @@
 import 'package:flup_openapi_lib/api.dart';
 import 'package:test/test.dart';
 
-// tests for Expense
+// tests for PersonDto
 void main() {
-  // final instance = Expense();
+  // final instance = PersonDto();
 
-  group('test Expense', () {
-    // String description
-    test('to test the property `description`', () async {
+  group('test PersonDto', () {
+    // String id
+    test('to test the property `id`', () async {
       // TODO
     });
 
-    // int amount
-    test('to test the property `amount`', () async {
+    // String name
+    test('to test the property `name`', () async {
       // TODO
     });
 

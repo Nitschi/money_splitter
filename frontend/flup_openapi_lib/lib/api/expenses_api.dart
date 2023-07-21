@@ -19,13 +19,13 @@ class ExpensesApi {
   /// Performs an HTTP 'POST /Expenses' operation and returns the [Response].
   /// Parameters:
   ///
-  /// * [Expense] expense:
-  Future<Response> addExpenseWithHttpInfo({ Expense? expense, }) async {
+  /// * [ExpenseDto] expenseDto:
+  Future<Response> addExpenseWithHttpInfo({ ExpenseDto? expenseDto, }) async {
     // ignore: prefer_const_declarations
     final path = r'/Expenses';
 
     // ignore: prefer_final_locals
-    Object? postBody = expense;
+    Object? postBody = expenseDto;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
@@ -47,9 +47,9 @@ class ExpensesApi {
 
   /// Parameters:
   ///
-  /// * [Expense] expense:
-  Future<Expense?> addExpense({ Expense? expense, }) async {
-    final response = await addExpenseWithHttpInfo( expense: expense, );
+  /// * [ExpenseDto] expenseDto:
+  Future<ExpenseDto?> addExpense({ ExpenseDto? expenseDto, }) async {
+    final response = await addExpenseWithHttpInfo( expenseDto: expenseDto, );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -57,7 +57,7 @@ class ExpensesApi {
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Expense',) as Expense;
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ExpenseDto',) as ExpenseDto;
     
     }
     return null;
@@ -89,7 +89,7 @@ class ExpensesApi {
     );
   }
 
-  Future<List<Expense>?> getExpenses() async {
+  Future<List<ExpenseDto>?> getExpenses() async {
     final response = await getExpensesWithHttpInfo();
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
@@ -99,8 +99,8 @@ class ExpensesApi {
     // FormatException when trying to decode an empty string.
     if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
       final responseBody = await _decodeBodyBytes(response);
-      return (await apiClient.deserializeAsync(responseBody, 'List<Expense>') as List)
-        .cast<Expense>()
+      return (await apiClient.deserializeAsync(responseBody, 'List<ExpenseDto>') as List)
+        .cast<ExpenseDto>()
         .toList();
 
     }

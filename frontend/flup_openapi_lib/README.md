@@ -41,10 +41,10 @@ import 'package:flup_openapi_lib/api.dart';
 
 
 final api_instance = ExpensesApi();
-final expense = Expense(); // Expense | 
+final expenseDto = ExpenseDto(); // ExpenseDto | 
 
 try {
-    final result = api_instance.addExpense(expense);
+    final result = api_instance.addExpense(expenseDto);
     print(result);
 } catch (e) {
     print('Exception when calling ExpensesApi->addExpense: $e\n');
@@ -64,12 +64,13 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [Expense](doc\/Expense.md)
+ - [ExpenseDto](doc\/ExpenseDto.md)
+ - [PersonDto](doc\/PersonDto.md)
 
 
 ## Documentation For Authorization
 
- All endpoints do not require authorization.
+Endpoints do not require authorization.
 
 
 ## Author

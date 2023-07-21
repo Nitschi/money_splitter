@@ -29,7 +29,8 @@ part 'auth/http_bearer_auth.dart';
 
 part 'api/expenses_api.dart';
 
-part 'model/expense.dart';
+part 'model/expense_dto.dart';
+part 'model/person_dto.dart';
 
 
 const _delimiters = {'csv': ',', 'ssv': ' ', 'tsv': '\t', 'pipes': '|'};

@@ -3,8 +3,9 @@
 .travis.yml
 README.md
 analysis_options.yaml
-doc/Expense.md
+doc/ExpenseDto.md
 doc/ExpensesApi.md
+doc/PersonDto.md
 git_push.sh
 lib/api.dart
 lib/api/expenses_api.dart
@@ -16,7 +17,9 @@ lib/auth/authentication.dart
 lib/auth/http_basic_auth.dart
 lib/auth/http_bearer_auth.dart
 lib/auth/oauth.dart
-lib/model/expense.dart
+lib/model/expense_dto.dart
+lib/model/person_dto.dart
 pubspec.yaml
-test/expense_test.dart
+test/expense_dto_test.dart
 test/expenses_api_test.dart
+test/person_dto_test.dart

@@ -17,12 +17,12 @@ void main() {
   // final instance = ExpensesApi();
 
   group('tests for ExpensesApi', () {
-    //Future<Expense> addExpense({ Expense expense }) async
+    //Future<ExpenseDto> addExpense({ ExpenseDto expenseDto }) async
     test('test addExpense', () async {
       // TODO
     });
 
-    //Future<List<Expense>> getExpenses() async
+    //Future<List<ExpenseDto>> getExpenses() async
     test('test getExpenses', () async {
       // TODO
     });
