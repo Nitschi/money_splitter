@@ -1,13 +1,15 @@
+import 'package:flup/pages/AddExpensePage.dart';
+import 'package:flup/pages/ExpensesPage.dart';
 import 'package:flup_openapi_lib/api.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
+import 'notifiers/MyAppStateNotifier.dart';
 
 void main() async {
   final apiClient = ApiClient(basePath: 'http://localhost:55555');
-  final expenses = await ExpensesApi(apiClient).getExpenses();
-  print(expenses?[0].toString());
-
+  //final expenses = await ExpensesApi(apiClient).getExpenses();
+  //print(expenses?[0].toString());
   runApp(MyApp());
 }
 
@@ -27,15 +29,6 @@ class MyApp extends StatelessWidget {
         home: MyHomePage(),
       ),
     );
-  }
-}
-
-class MyAppState extends ChangeNotifier {
-  List<Expense> expenses = [];
-
-  void removeExpense(Expense expense) {
-    expenses.remove(expense);
-    notifyListeners();
   }
 }
 
@@ -97,95 +90,4 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     });
   }
-}
-
-class ExpensesPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-
-    if (appState.expenses.isEmpty) {
-      return Center(
-        child: Text('No expenses yet.'),
-      );
-    }
-
-    return ListView(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: Text('You have '
-              '${appState.expenses.length} expenses:'),
-        ),
-        for (var expense in appState.expenses)
-          ListTile(
-            leading: IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                appState.removeExpense(expense);
-              },
-            ),
-            title: Text(
-                '${expense.title} for ${expense.price} ${expense.currency} paid by ${expense.person}'),
-          ),
-      ],
-    );
-  }
-}
-
-class AddPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-    final expenseController = TextEditingController();
-    final priceController = TextEditingController();
-
-    return Form(
-      child: Center(
-        child: FractionallySizedBox(
-          widthFactor: 0.8,
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: 'What did you pay?',
-                  labelText: 'Expense title',
-                ),
-                controller: expenseController,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly
-                ],
-                decoration: const InputDecoration(
-                  hintText: 'How much was it?',
-                  labelText: 'Price',
-                ),
-                controller: priceController,
-              ),
-              SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () {
-                  appState.expenses.add(Expense(
-                      int.parse(priceController.text), expenseController.text));
-                },
-                child: Text('Add'),
-              ),
-              // Add TextFormFields and ElevatedButton here.
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class Expense {
-  int price = 0;
-  String title = "";
-  final currency = "CHF";
-  final person = "me";
-
-  Expense(this.price, this.title);
 }
