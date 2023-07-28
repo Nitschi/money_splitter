@@ -5,7 +5,7 @@ import '../models/expense.dart';
 
 class ExpenseMapper {
   static Expense toExpense(ExpenseDto expenseDto) {
-    var expense = Expense(expenseDto.amount!, expenseDto.description!);
+    var expense = Expense(expenseDto.amount, expenseDto.description);
     return expense;
   }
 

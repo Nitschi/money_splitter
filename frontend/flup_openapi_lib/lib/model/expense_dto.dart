@@ -13,40 +13,22 @@ part of openapi.api;
 class ExpenseDto {
   /// Returns a new [ExpenseDto] instance.
   ExpenseDto({
-    this.description,
-    this.amount,
-    this.time,
-    this.paidBy,
+    required this.description,
+    required this.amount,
+    required this.time,
+    required this.paidBy,
     this.paidFor = const [],
   });
 
-  String? description;
+  String description;
 
-  ///
-  /// Please note: This property should have been non-nullable! Since the specification file
-  /// does not include a default value (using the "default:" property), however, the generated
-  /// source code must fall back to having a nullable type.
-  /// Consider adding a "default:" property in the specification file to hide this note.
-  ///
-  int? amount;
+  int amount;
 
-  ///
-  /// Please note: This property should have been non-nullable! Since the specification file
-  /// does not include a default value (using the "default:" property), however, the generated
-  /// source code must fall back to having a nullable type.
-  /// Consider adding a "default:" property in the specification file to hide this note.
-  ///
-  DateTime? time;
+  DateTime time;
 
-  ///
-  /// Please note: This property should have been non-nullable! Since the specification file
-  /// does not include a default value (using the "default:" property), however, the generated
-  /// source code must fall back to having a nullable type.
-  /// Consider adding a "default:" property in the specification file to hide this note.
-  ///
-  PersonDto? paidBy;
+  PersonDto paidBy;
 
-  List<PersonDto>? paidFor;
+  List<PersonDto> paidFor;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is ExpenseDto &&
@@ -59,42 +41,22 @@ class ExpenseDto {
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
-    (description == null ? 0 : description!.hashCode) +
-    (amount == null ? 0 : amount!.hashCode) +
-    (time == null ? 0 : time!.hashCode) +
-    (paidBy == null ? 0 : paidBy!.hashCode) +
-    (paidFor == null ? 0 : paidFor!.hashCode);
+    (description.hashCode) +
+    (amount.hashCode) +
+    (time.hashCode) +
+    (paidBy.hashCode) +
+    (paidFor.hashCode);
 
   @override
   String toString() => 'ExpenseDto[description=$description, amount=$amount, time=$time, paidBy=$paidBy, paidFor=$paidFor]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (this.description != null) {
       json[r'description'] = this.description;
-    } else {
-      json[r'description'] = null;
-    }
-    if (this.amount != null) {
       json[r'amount'] = this.amount;
-    } else {
-      json[r'amount'] = null;
-    }
-    if (this.time != null) {
-      json[r'time'] = this.time!.toUtc().toIso8601String();
-    } else {
-      json[r'time'] = null;
-    }
-    if (this.paidBy != null) {
+      json[r'time'] = this.time.toUtc().toIso8601String();
       json[r'paidBy'] = this.paidBy;
-    } else {
-      json[r'paidBy'] = null;
-    }
-    if (this.paidFor != null) {
       json[r'paidFor'] = this.paidFor;
-    } else {
-      json[r'paidFor'] = null;
-    }
     return json;
   }
 
@@ -117,10 +79,10 @@ class ExpenseDto {
       }());
 
       return ExpenseDto(
-        description: mapValueOfType<String>(json, r'description'),
-        amount: mapValueOfType<int>(json, r'amount'),
-        time: mapDateTime(json, r'time', ''),
-        paidBy: PersonDto.fromJson(json[r'paidBy']),
+        description: mapValueOfType<String>(json, r'description')!,
+        amount: mapValueOfType<int>(json, r'amount')!,
+        time: mapDateTime(json, r'time', '')!,
+        paidBy: PersonDto.fromJson(json[r'paidBy'])!,
         paidFor: PersonDto.listFromJson(json[r'paidFor']),
       );
     }
@@ -169,6 +131,11 @@ class ExpenseDto {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
+    'description',
+    'amount',
+    'time',
+    'paidBy',
+    'paidFor',
   };
 }
 
