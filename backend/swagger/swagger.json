@@ -95,11 +95,18 @@
   "components": {
     "schemas": {
       "ExpenseDto": {
+        "required": [
+          "amount",
+          "description",
+          "paidBy",
+          "paidFor",
+          "time"
+        ],
         "type": "object",
         "properties": {
           "description": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "amount": {
             "type": "integer",
@@ -116,13 +123,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PersonDto"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false
       },
       "PersonDto": {
+        "required": [
+          "id",
+          "name"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -130,8 +140,8 @@
             "format": "uuid"
           },
           "name": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false

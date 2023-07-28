@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace src.Dtos;
 
-public record PersonDto(Guid Id, string Name);
+public record PersonDto([property: Required] Guid Id, [property: Required] string Name);
