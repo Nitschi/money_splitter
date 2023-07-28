@@ -7,6 +7,7 @@ class ExpensesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
+    appState.updateExpenses();
 
     if (appState.expenses.isEmpty) {
       return Center(
@@ -30,7 +31,7 @@ class ExpensesPage extends StatelessWidget {
               },
             ),
             title: Text(
-                '${expense.title} for ${expense.price} ${expense.currency} paid by ${expense.person}'),
+                '${expense.title} for ${expense.price} ${expense.currency} paid by ${expense.paidBy.name}'),
           ),
       ],
     );

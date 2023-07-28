@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../models/Expense.dart';
+import '../models/expense.dart';
 import '../notifiers/MyAppStateNotifier.dart';
 
 class AddPage extends StatelessWidget {
@@ -39,7 +39,7 @@ class AddPage extends StatelessWidget {
               SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
-                  appState.expenses.add(Expense(
+                  appState.addExpense(Expense(
                       int.parse(priceController.text), expenseController.text));
                 },
                 child: Text('Add'),

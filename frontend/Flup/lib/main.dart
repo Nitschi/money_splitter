@@ -1,15 +1,11 @@
 import 'package:flup/pages/AddExpensePage.dart';
 import 'package:flup/pages/ExpensesPage.dart';
-import 'package:flup_openapi_lib/api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'notifiers/MyAppStateNotifier.dart';
 
 void main() async {
-  final apiClient = ApiClient(basePath: 'http://localhost:55555');
-  //final expenses = await ExpensesApi(apiClient).getExpenses();
-  //print(expenses?[0].toString());
   runApp(MyApp());
 }
 
