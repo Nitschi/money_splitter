@@ -3,6 +3,7 @@ import 'package:flup/pages/ExpensesPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'notifiers/AddPageState.dart';
 import 'notifiers/MyAppStateNotifier.dart';
 
 void main() async {
@@ -41,7 +42,10 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = AddPage();
+        page = ChangeNotifierProvider(
+          create: (context) => AddPageState(),
+          child: AddPage(),
+        );
         break;
       case 1:
         page = ExpensesPage();
