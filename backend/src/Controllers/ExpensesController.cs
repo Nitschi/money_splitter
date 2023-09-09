@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using src.Dtos;
+using money_splitter.Dtos;
 
-namespace src.Controllers;
+namespace money_splitter.Controllers;
 
 [ApiController]
 [Route("[controller]")]

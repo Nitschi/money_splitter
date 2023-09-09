@@ -1,5 +1,21 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace src.Dtos;
+namespace money_splitter.Dtos;
 
-public record ExpenseDto([property: Required] string Description, [property: Required] int Amount, [property: Required] DateTime Time, [property: Required] PersonDto PaidBy, [property: Required] List<PersonDto> PaidFor);
+public record ExpenseDto
+{
+    public ExpenseDto(string Description, int Amount, DateTime Time, PersonDto PaidBy, List<PersonDto> PaidFor)
+    {
+        this.Description = Description;
+        this.Amount = Amount;
+        this.Time = Time;
+        this.PaidBy = PaidBy;
+        this.PaidFor = PaidFor;
+    }
+
+    [Required] public string Description { get; init; }
+    [Required] public int Amount { get; init; }
+    [Required] public DateTime Time { get; init; }
+    [Required] public PersonDto PaidBy { get; init; }
+    [Required] public List<PersonDto> PaidFor { get; init; }
+}
