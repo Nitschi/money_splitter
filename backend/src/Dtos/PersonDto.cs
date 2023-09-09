@@ -4,6 +4,6 @@ namespace money_splitter.Dtos;
 
 public record PersonDto
 {
-    [Required] public Guid Id { get; init; }
-    [Required] public string Name { get; init; }
+    [Required] public required Guid Id { get; init; }
+    [Required] public required string Name { get; init; }
 }
