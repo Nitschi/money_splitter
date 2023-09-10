@@ -38,7 +38,10 @@ public class ExpensesController : ControllerBase
     {
         AddMembersIfNotExists(expenseDto);
 
-        var expense = _context.Expenses.Find(expenseDto.Id);
+        var expense = _context.Expenses
+            .Include(e => e.PaidBy)
+            .Include(e => e.PaidFor)
+            .SingleOrDefault(e => e.Id == expenseDto.Id);
 
         if (expense is not null)
         {
@@ -74,10 +77,14 @@ public class ExpensesController : ControllerBase
             existingPersons.Add(_mapper.Map<Person>(paidFor));
         }
 
+        if (existingPersons.All(p => p.Id != expenseDto.PaidBy.Id))
+        {
+            _log.LogInformation("Member {MemberId} does not exist, adding {Name}", expenseDto.PaidBy.Id,
+                expenseDto.PaidBy.Name);
+            _context.Persons.Add(_mapper.Map<Person>(expenseDto.PaidBy));
+        }
 
-        if (existingPersons.Any(p => p.Id == expenseDto.PaidBy.Id)) return;
-        _log.LogInformation("Member {MemberId} does not exist, adding {Name}", expenseDto.PaidBy.Id,
-            expenseDto.PaidBy.Name);
-        _context.Persons.Add(_mapper.Map<Person>(expenseDto.PaidBy));
+        _context.SaveChanges();
     }
+
 }
