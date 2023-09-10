@@ -4,6 +4,7 @@ namespace money_splitter.Dtos;
 
 public record ExpenseDto
 {
+    [Required] public required Guid Id { get; init; }
     [Required] public required string Description { get; init; }
     [Required] public required int Amount { get; init; }
     [Required] public required DateTime Time { get; init; }

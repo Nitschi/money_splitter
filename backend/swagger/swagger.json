@@ -98,12 +98,17 @@
         "required": [
           "amount",
           "description",
+          "id",
           "paidBy",
           "paidFor",
           "time"
         ],
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
           "description": {
             "minLength": 1,
             "type": "string"
