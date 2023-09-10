@@ -1,4 +1,4 @@
-namespace money_splitter.Models;
+namespace flup_backend.Models;
 
 public record Expense
 {

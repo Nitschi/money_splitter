@@ -3,11 +3,11 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using money_splitter.Data;
+using flup_backend.Data;
 
 #nullable disable
 
-namespace money_splitter.Migrations
+namespace flup_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -32,7 +32,7 @@ namespace money_splitter.Migrations
                     b.ToTable("ExpensePerson");
                 });
 
-            modelBuilder.Entity("money_splitter.Models.Expense", b =>
+            modelBuilder.Entity("flup_backend.Models.Expense", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,7 +58,7 @@ namespace money_splitter.Migrations
                     b.ToTable("Expenses");
                 });
 
-            modelBuilder.Entity("money_splitter.Models.Person", b =>
+            modelBuilder.Entity("flup_backend.Models.Person", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,22 +75,22 @@ namespace money_splitter.Migrations
 
             modelBuilder.Entity("ExpensePerson", b =>
                 {
-                    b.HasOne("money_splitter.Models.Expense", null)
+                    b.HasOne("flup_backend.Models.Expense", null)
                         .WithMany()
                         .HasForeignKey("ExpensesPaidForId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("money_splitter.Models.Person", null)
+                    b.HasOne("flup_backend.Models.Person", null)
                         .WithMany()
                         .HasForeignKey("PaidForId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("money_splitter.Models.Expense", b =>
+            modelBuilder.Entity("flup_backend.Models.Expense", b =>
                 {
-                    b.HasOne("money_splitter.Models.Person", "PaidBy")
+                    b.HasOne("flup_backend.Models.Person", "PaidBy")
                         .WithMany("ExpensesPaidBy")
                         .HasForeignKey("PaidById")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -99,7 +99,7 @@ namespace money_splitter.Migrations
                     b.Navigation("PaidBy");
                 });
 
-            modelBuilder.Entity("money_splitter.Models.Person", b =>
+            modelBuilder.Entity("flup_backend.Models.Person", b =>
                 {
                     b.Navigation("ExpensesPaidBy");
                 });

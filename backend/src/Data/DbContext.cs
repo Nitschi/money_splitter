@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using money_splitter.Models;
+using flup_backend.Models;
 
-namespace money_splitter.Data;
+namespace flup_backend.Data;
 
 public class AppDbContext : DbContext
 {

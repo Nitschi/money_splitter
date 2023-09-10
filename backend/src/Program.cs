@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using money_splitter.Data;
-using money_splitter.Resolvers;
+using flup_backend.Data;
+using flup_backend.Resolvers;
 
 var builder = WebApplication.CreateBuilder(args);
 

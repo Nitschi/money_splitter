@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using money_splitter.Dtos;
-using money_splitter.Models;
+using flup_backend.Dtos;
+using flup_backend.Models;
 
-namespace money_splitter.Profiles;
+namespace flup_backend.Profiles;
 
 public class PersonProfile : Profile
 {

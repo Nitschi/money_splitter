@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace money_splitter.Migrations
+namespace flup_backend.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

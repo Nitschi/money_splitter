@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using money_splitter.Data;
-using money_splitter.Dtos;
-using money_splitter.Models;
+using flup_backend.Data;
+using flup_backend.Dtos;
+using flup_backend.Models;
 
-namespace money_splitter.Resolvers;
+namespace flup_backend.Resolvers;
 
 public class ExistingPersonResolver : IMemberValueResolver<ExpenseDto, Expense, Guid, Person>
 {

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using money_splitter.Dtos;
-using money_splitter.Models;
-using money_splitter.Resolvers;
+using flup_backend.Dtos;
+using flup_backend.Models;
+using flup_backend.Resolvers;
 
-namespace money_splitter.Profiles;
+namespace flup_backend.Profiles;
 
 public class ExpenseProfile : Profile
 {
