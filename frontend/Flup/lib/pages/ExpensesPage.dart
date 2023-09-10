@@ -31,7 +31,9 @@ class ExpensesPage extends StatelessWidget {
               },
             ),
             title: Text(
-                '${expense.title} for ${expense.price} ${expense.currency} paid by ${expense.paidBy.name}'),
+                '${expense.title} for ${expense.price} ${expense.currency} paid by ${expense.paidBy.name} for ${expense.paidFor.map((p) {
+              return p.name;
+            })}'),
           ),
       ],
     );

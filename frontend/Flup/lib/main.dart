@@ -39,11 +39,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
     Widget page;
     switch (selectedIndex) {
       case 0:
         page = ChangeNotifierProvider(
-          create: (context) => AddPageState(),
+          create: (context) => AddPageState(appState.members),
           child: AddPage(),
         );
         break;

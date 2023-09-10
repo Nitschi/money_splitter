@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 import '../models/person.dart';
 
 class AddPageState extends ChangeNotifier {
-  List<Person> people = [
-    Person(Uuid().v4().toString(), "Alexander"),
-    Person(Uuid().v4().toString(), "Laura")
-  ];
-  Person? paidBy;
+  late Person paidBy;
+  Map<Person, bool> paidFor = {};
+  final expenseController = TextEditingController();
+  final priceController = TextEditingController();
 
-  AddPageState() {
-    paidBy = people[0];
-  }
-
-  void setPaidBy(Person? newPaidBy) {
+  void setPaidBy(Person newPaidBy) {
     paidBy = newPaidBy;
     notifyListeners();
+  }
+
+  void setPaidFor(bool isChecked, Person person) {
+    paidFor[person] = isChecked;
+    notifyListeners();
+  }
+
+  AddPageState(List<Person> members) {
+    for (var person in members) {
+      paidFor[person] = true;
+    }
+    paidBy = members[0];
   }
 }
