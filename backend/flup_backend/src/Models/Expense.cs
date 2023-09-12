@@ -7,5 +7,5 @@ public record Expense
     public required int Amount { get; init; }
     public required DateTime Time { get; init; }
     public required Person PaidBy { get; init; }
-    public required List<Person> PaidFor { get; init; }
+    public required HashSet<Person> PaidFor { get; init; }
 }

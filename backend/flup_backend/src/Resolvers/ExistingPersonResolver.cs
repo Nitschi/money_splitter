@@ -21,7 +21,7 @@ public class ExistingPersonResolver : IMemberValueResolver<ExpenseDto, Expense, 
     }
 }
 
-public class ExistingPersonsResolver : IValueResolver<ExpenseDto, Expense, List<Person>>
+public class ExistingPersonsResolver : IValueResolver<ExpenseDto, Expense, HashSet<Person>>
 {
     private readonly AppDbContext _context;
 
@@ -30,13 +30,13 @@ public class ExistingPersonsResolver : IValueResolver<ExpenseDto, Expense, List<
         _context = context;
     }
 
-    public List<Person> Resolve(ExpenseDto source, Expense destination, List<Person> destMember,
+    public HashSet<Person> Resolve(ExpenseDto source, Expense destination, HashSet<Person> destMember,
         ResolutionContext context)
     {
         // Fetch the list of IDs first
         var ids = source.PaidFor.Select(p => p.Id).ToList();
 
         // Now query the database using the list of IDs
-        return _context.Persons.Where(p => ids.Contains(p.Id)).ToList();
+        return _context.Persons.Where(p => ids.Contains(p.Id)).ToHashSet();
     }
 }

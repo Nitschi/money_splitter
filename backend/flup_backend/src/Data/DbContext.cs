@@ -14,8 +14,6 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // modelBuilder.Entity<Book>().HasMany(b => b.Expenses);
-        // modelBuilder.Entity<Book>().HasMany(b => b.Members);
         modelBuilder.Entity<Expense>().HasOne(e => e.PaidBy).WithMany(p => p.ExpensesPaidBy);
         modelBuilder.Entity<Expense>().HasMany(e => e.PaidFor).WithMany(p => p.ExpensesPaidFor);
     }
