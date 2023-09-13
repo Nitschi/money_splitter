@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace money_splitter.Dtos;
+namespace flup_backend.Dtos;
 
 public record PersonDto
 {

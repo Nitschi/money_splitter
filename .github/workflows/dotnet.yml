@@ -1,0 +1,32 @@
+name: .NET Build and Test
+
+on: 
+  push:
+    paths:
+      - 'backend/**'
+  pull_request:
+    paths:
+      - 'backend/**'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '7.0.x' # adjust this to your .NET version
+
+    - name: Restore dependencies
+      run: dotnet restore backend/FlupBackend.sln
+
+    - name: Build
+      run: dotnet build backend/FlupBackend.sln --no-restore
+
+    - name: Test
+      run: dotnet test backend/FlupBackend.sln --no-build --verbosity normal
