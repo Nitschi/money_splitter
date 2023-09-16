@@ -1,0 +1,11 @@
+cloud.${DOMAIN} nextcloud.${DOMAIN} {
+  reverse_proxy nextcloud:80
+}
+
+flup.* {
+  reverse_proxy flup_frontend:80
+}
+
+flup_backend.${DOMAIN} {
+    reverse_proxy flup_backend:55555
+}
