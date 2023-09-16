@@ -5,9 +5,9 @@ RUN dotnet tool install --global dotnet-ef
 ENV PATH="${PATH}:/root/.dotnet/tools"
 
 
-COPY . /backend
-WORKDIR /backend
-RUN dotnet ef migrations add InitialCreate
+COPY ./backend /backend
+WORKDIR /backend/flup_backend
+RUN cd /backend/flup_backend
 RUN dotnet ef database update
 
-ENTRYPOINT cd /backend && dotnet run
+ENTRYPOINT cd /backend/flup_backend && dotnet run
