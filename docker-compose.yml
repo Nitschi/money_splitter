@@ -1,0 +1,42 @@
+services:
+  # Reverse Proxy using Caddy
+  caddy-proxy:
+    image: caddy:latest
+    container_name: caddy-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deployment/ReverseProxyCaddyFile:/etc/caddy/Caddyfile
+      - caddy-data:/data
+
+  # Caddy Webserver for Flutter app
+  flup_frontend:
+    image: caddy:latest
+    container_name: flup_frontend
+    hostname: flup_frontend
+    volumes:
+      - ./frontend/Flup/build/web:/usr/share/caddy
+      - ./deployment/FlutterCaddyfile:/etc/caddy/Caddyfile
+    depends_on:
+      - caddy-proxy
+
+  # Flup Backend Service
+  flup_backend:
+    image: flup_backend
+    build:
+      dockerfile: backend/flup_backend/Dockerfile
+    container_name: flup_backend
+    hostname: flup_backend
+    volumes:
+      - sqlite-db:/backend/sqlite
+    ports:
+      - "55555:55555"
+    working_dir: /backend
+    command: ["dotnet", "run", "--project flup_backend"]
+    depends_on:
+      - caddy-proxy
+
+volumes:
+  sqlite-db:
+  caddy-data:
