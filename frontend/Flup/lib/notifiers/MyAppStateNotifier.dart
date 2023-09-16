@@ -19,9 +19,34 @@ class MyAppState extends ChangeNotifier {
     Person(Uuid().v4().toString(), "Adrian")
   ];
 
+  Map<Person, double> balance = {};
+
+  void setUpBalance() {
+    for (var member in members) {
+      balance[member] = 0;
+    }
+  }
+
+  void calculateBalance() {
+    setUpBalance();
+    for (var member in balance.keys) {
+      for (var expense in expenses) {
+        if (expense.paidBy.id == member.id) {
+          balance[member] = balance[member]! + expense.price;
+        }
+        if (expense.paidFor.map((e) => e.id).contains(member.id)) {
+          balance[member] =
+              balance[member]! - (expense.price / expense.paidFor.length);
+        }
+      }
+    }
+    notifyListeners();
+  }
+
   void removeExpense(Expense expense) {
     expenses.remove(expense);
     // TODO update in BE
+    calculateBalance();
     notifyListeners();
   }
 
@@ -29,6 +54,7 @@ class MyAppState extends ChangeNotifier {
     expenses.add(expense);
     ExpensesApi(apiClient)
         .addExpense(expenseDto: ExpenseMapper.toExpenseDto(expense));
+    calculateBalance();
     notifyListeners();
   }
 
@@ -39,6 +65,7 @@ class MyAppState extends ChangeNotifier {
       return;
     }
     expenses = ExpenseMapper.toExpenses(expenseDtos);
+    calculateBalance();
     notifyListeners();
   }
 }

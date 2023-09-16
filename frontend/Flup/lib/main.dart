@@ -1,4 +1,5 @@
 import 'package:flup/pages/AddExpensePage.dart';
+import 'package:flup/pages/BalancePage.dart';
 import 'package:flup/pages/ExpensesPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,6 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1:
         page = ExpensesPage();
         break;
+      case 2:
+        page = BalancePage();
+        break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -70,6 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   NavigationRailDestination(
                     icon: Icon(Icons.attach_money),
                     label: Text('Expenses'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.scale),
+                    label: Text('Balance'),
                   ),
                 ],
                 selectedIndex: selectedIndex,
