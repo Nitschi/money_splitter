@@ -25,7 +25,7 @@ services:
   flup_backend:
     image: flup_backend
     build:
-      dockerfile: backend/flup_backend/Dockerfile
+      dockerfile: Dockerfile
     container_name: flup_backend
     hostname: flup_backend
     volumes:
