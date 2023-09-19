@@ -1,6 +1,7 @@
 import 'person.dart';
 
 class Expense {
+  String id;
   int price;
   String title;
   DateTime time = DateTime.now();
@@ -9,5 +10,5 @@ class Expense {
 
   final currency = "CHF";
 
-  Expense(this.price, this.title, this.paidBy, this.paidFor);
+  Expense(this.id, this.price, this.title, this.paidBy, this.paidFor);
 }
