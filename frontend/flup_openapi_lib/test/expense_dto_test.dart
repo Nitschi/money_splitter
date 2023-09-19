@@ -16,6 +16,11 @@ void main() {
   // final instance = ExpenseDto();
 
   group('test ExpenseDto', () {
+    // String id
+    test('to test the property `id`', () async {
+      // TODO
+    });
+
     // String description
     test('to test the property `description`', () async {
       // TODO

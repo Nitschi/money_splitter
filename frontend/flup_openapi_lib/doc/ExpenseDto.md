@@ -8,6 +8,7 @@ import 'package:flup_openapi_lib/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **String** |  | 
 **description** | **String** |  | 
 **amount** | **int** |  | 
 **time** | [**DateTime**](DateTime.md) |  | 
