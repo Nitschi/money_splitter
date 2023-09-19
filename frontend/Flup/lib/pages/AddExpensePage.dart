@@ -2,6 +2,7 @@ import 'package:flup/notifiers/AddPageState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 import '../models/expense.dart';
 import '../models/person.dart';
@@ -92,6 +93,7 @@ class AddPage extends StatelessWidget {
                     }
 
                     appState.addExpense(Expense(
+                        Uuid().v4().toString(),
                         int.parse(addPageState.priceController.text),
                         addPageState.expenseController.text,
                         addPageState.paidBy,

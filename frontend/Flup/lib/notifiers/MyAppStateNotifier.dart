@@ -2,7 +2,7 @@ import 'package:flup_openapi_lib/api.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-import '../mappers/expenseMapper.dart';
+import '../mappers/expense_mapper.dart';
 import '../models/expense.dart';
 import '../models/person.dart';
 

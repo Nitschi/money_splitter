@@ -5,7 +5,7 @@ import '../models/expense.dart';
 
 class ExpenseMapper {
   static Expense toExpense(ExpenseDto expenseDto) {
-    var expense = Expense(expenseDto.amount, expenseDto.description,
+    var expense = Expense(expenseDto.id, expenseDto.amount, expenseDto.description,
         toPerson(expenseDto.paidBy), expenseDto.paidFor.map(toPerson).toList());
     return expense;
   }
@@ -16,6 +16,7 @@ class ExpenseMapper {
 
   static ExpenseDto toExpenseDto(Expense expense) {
     var expenseDto = ExpenseDto(
+        id: expense.id,
         description: expense.title,
         amount: expense.price,
         time: expense.time,
