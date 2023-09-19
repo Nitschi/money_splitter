@@ -84,6 +84,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 onDestinationSelected: (value) {
                   setState(() {
                     selectedIndex = value;
+                    switch (selectedIndex) {
+                      case 0: // Add Page                       
+                        break;
+                      case 1: // Expenses Page
+                      case 2: // Balance Page
+                        appState.updateExpenses();
+                        break;
+                      default:
+                    }
                   });
                 },
               ),

@@ -7,7 +7,6 @@ class BalancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    appState.updateExpenses();
 
     if (appState.expenses.isEmpty) {
       return Center(
