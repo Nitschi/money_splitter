@@ -13,12 +13,15 @@ part of openapi.api;
 class ExpenseDto {
   /// Returns a new [ExpenseDto] instance.
   ExpenseDto({
+    required this.id,
     required this.description,
     required this.amount,
     required this.time,
     required this.paidBy,
     this.paidFor = const [],
   });
+
+  String id;
 
   String description;
 
@@ -32,6 +35,7 @@ class ExpenseDto {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is ExpenseDto &&
+     other.id == id &&
      other.description == description &&
      other.amount == amount &&
      other.time == time &&
@@ -41,6 +45,7 @@ class ExpenseDto {
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
+    (id.hashCode) +
     (description.hashCode) +
     (amount.hashCode) +
     (time.hashCode) +
@@ -48,10 +53,11 @@ class ExpenseDto {
     (paidFor.hashCode);
 
   @override
-  String toString() => 'ExpenseDto[description=$description, amount=$amount, time=$time, paidBy=$paidBy, paidFor=$paidFor]';
+  String toString() => 'ExpenseDto[id=$id, description=$description, amount=$amount, time=$time, paidBy=$paidBy, paidFor=$paidFor]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+      json[r'id'] = this.id;
       json[r'description'] = this.description;
       json[r'amount'] = this.amount;
       json[r'time'] = this.time.toUtc().toIso8601String();
@@ -79,6 +85,7 @@ class ExpenseDto {
       }());
 
       return ExpenseDto(
+        id: mapValueOfType<String>(json, r'id')!,
         description: mapValueOfType<String>(json, r'description')!,
         amount: mapValueOfType<int>(json, r'amount')!,
         time: mapDateTime(json, r'time', '')!,
@@ -131,6 +138,7 @@ class ExpenseDto {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
+    'id',
     'description',
     'amount',
     'time',
