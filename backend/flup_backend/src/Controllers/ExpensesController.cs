@@ -56,4 +56,25 @@ public class ExpensesController : ControllerBase
 
         return CreatedAtAction(nameof(AddExpense), _mapper.Map<ExpenseDto>(expense));
     }
+
+    [HttpDelete(Name = "RemoveExpense")]
+    public IActionResult RemoveExpense(ExpenseDto expenseDto)
+    {
+        Expense expense;
+        if (_context.Expenses.Any(e => e.Id == expenseDto.Id))
+        {
+            // Remove the existing expense
+            expense = _mapper.Map<Expense>(expenseDto);
+            _context.Remove(expense);
+            _log.LogInformation("Removed expense {ExpenseId}", expense.Id);
+        }
+        else
+        {
+            _log.LogInformation("Expense with {ExpenseDtoId} was not found", expenseDto.Id);
+        }
+
+        _context.SaveChanges();
+
+        return NoContent();
+    }
 }

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../notifiers/MyAppStateNotifier.dart';
 
-class ExpensesPage extends StatelessWidget {
+class BalancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
@@ -19,20 +19,12 @@ class ExpensesPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(20),
           child: Text('You have '
-              '${appState.expenses.length} expenses:'),
+              '${appState.expenses.length} expense(s) and your balance is:'),
         ),
-        for (var expense in appState.expenses)
+        for (var member in appState.members)
           ListTile(
-            leading: IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                appState.removeExpense(expense);
-              },
-            ),
             title: Text(
-                '${expense.title} for ${expense.price} ${expense.currency} paid by ${expense.paidBy.name} for ${expense.paidFor.map((p) {
-              return p.name;
-            })}'),
+                '${member.name} has a balance of ${appState.balance[member]}'),
           ),
       ],
     );

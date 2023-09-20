@@ -98,6 +98,8 @@ class AddPage extends StatelessWidget {
                         addPageState.expenseController.text,
                         addPageState.paidBy,
                         paidForSelected));
+                    addPageState.expenseController.clear();
+                    addPageState.priceController.clear();
                   },
                   child: Text('Add'),
                 ),
