@@ -16,6 +16,7 @@
 1. Support multiple Groups - setup page
 1. add expenses offline
 1. redesign expenses view
+1. set paid by to person which paid the last expense added on this app
 
 # Expansions
 1. interpret receipt photo as expense
