@@ -12,6 +12,7 @@ services:
       - caddy-data:/data
     environment:
       - DOMAIN
+    restart: unless-stopped
     networks:
       - my_network
 
@@ -22,15 +23,15 @@ services:
     hostname: flup_frontend
     volumes:
       - ./frontend/Flup/build/web:/usr/share/caddy
-      - ./deployment/FlutterCaddyfile:/etc/caddy/Caddyfile
+      - ./deployment/FlutterCaddyFile:/etc/caddy/Caddyfile
     networks:
       - my_network
+    restart: unless-stopped
     depends_on:
       - caddy-proxy
 
   # Flup Backend Service
   flup_backend:
-    image: flup_backend
     build:
       context : .
       dockerfile: Dockerfile
@@ -45,6 +46,7 @@ services:
     command: ["dotnet", "run", "--project flup_backend"]
     networks:
       - my_network
+    restart: unless-stopped
     depends_on:
       - caddy-proxy
 
