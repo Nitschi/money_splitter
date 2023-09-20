@@ -44,7 +44,8 @@ class MyAppState extends ChangeNotifier {
 
   void removeExpense(Expense expense) {
     expenses.remove(expense);
-    // TODO update in BE
+    ExpensesApi(apiClient)
+        .removeExpense(expenseDto: ExpenseMapper.toExpenseDto(expense));
     calculateBalance();
     notifyListeners();
   }
