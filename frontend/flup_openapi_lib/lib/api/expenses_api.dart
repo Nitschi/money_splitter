@@ -106,4 +106,43 @@ class ExpensesApi {
     }
     return null;
   }
+
+  /// Performs an HTTP 'DELETE /Expenses' operation and returns the [Response].
+  /// Parameters:
+  ///
+  /// * [ExpenseDto] expenseDto:
+  Future<Response> removeExpenseWithHttpInfo({ ExpenseDto? expenseDto, }) async {
+    // ignore: prefer_const_declarations
+    final path = r'/Expenses';
+
+    // ignore: prefer_final_locals
+    Object? postBody = expenseDto;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    const contentTypes = <String>['application/json', 'text/json', 'application/*+json'];
+
+
+    return apiClient.invokeAPI(
+      path,
+      'DELETE',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [ExpenseDto] expenseDto:
+  Future<void> removeExpense({ ExpenseDto? expenseDto, }) async {
+    final response = await removeExpenseWithHttpInfo( expenseDto: expenseDto, );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+  }
 }

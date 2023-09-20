@@ -60,6 +60,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ExpensesApi* | [**addExpense**](doc\/ExpensesApi.md#addexpense) | **POST** /Expenses | 
 *ExpensesApi* | [**getExpenses**](doc\/ExpensesApi.md#getexpenses) | **GET** /Expenses | 
+*ExpensesApi* | [**removeExpense**](doc\/ExpensesApi.md#removeexpense) | **DELETE** /Expenses | 
 
 
 ## Documentation For Models

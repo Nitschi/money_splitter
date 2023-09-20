@@ -27,5 +27,10 @@ void main() {
       // TODO
     });
 
+    //Future removeExpense({ ExpenseDto expenseDto }) async
+    test('test removeExpense', () async {
+      // TODO
+    });
+
   });
 }

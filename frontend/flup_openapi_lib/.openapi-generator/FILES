@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 analysis_options.yaml
@@ -20,6 +19,3 @@ lib/auth/oauth.dart
 lib/model/expense_dto.dart
 lib/model/person_dto.dart
 pubspec.yaml
-test/expense_dto_test.dart
-test/expenses_api_test.dart
-test/person_dto_test.dart
