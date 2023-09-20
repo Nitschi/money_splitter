@@ -1,11 +1,11 @@
 cloud.{$DOMAIN} {
-  reverse_proxy nextcloud:80
+	reverse_proxy nextcloud:80
 }
 
 flup.{$DOMAIN} {
-  reverse_proxy flup_frontend:80
+	reverse_proxy flup_frontend:80
 }
 
 flup-backend.{$DOMAIN} {
-    reverse_proxy flup_backend:55555
+	reverse_proxy flup_backend:55555
 }
