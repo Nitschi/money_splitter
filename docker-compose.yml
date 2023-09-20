@@ -1,3 +1,4 @@
+version: "3.5"
 services:
   # Reverse Proxy using Caddy
   caddy-proxy:
@@ -9,6 +10,10 @@ services:
     volumes:
       - ./deployment/ReverseProxyCaddyFile:/etc/caddy/Caddyfile
       - caddy-data:/data
+    environment:
+      - DOMAIN
+    networks:
+      - my_network
 
   # Caddy Webserver for Flutter app
   flup_frontend:
@@ -18,6 +23,8 @@ services:
     volumes:
       - ./frontend/Flup/build/web:/usr/share/caddy
       - ./deployment/FlutterCaddyfile:/etc/caddy/Caddyfile
+    networks:
+      - my_network
     depends_on:
       - caddy-proxy
 
@@ -25,7 +32,9 @@ services:
   flup_backend:
     image: flup_backend
     build:
+      context : .
       dockerfile: Dockerfile
+    image: flup_backend
     container_name: flup_backend
     hostname: flup_backend
     volumes:
@@ -34,9 +43,22 @@ services:
       - "55555:55555"
     working_dir: /backend
     command: ["dotnet", "run", "--project flup_backend"]
+    networks:
+      - my_network
     depends_on:
       - caddy-proxy
 
 volumes:
   sqlite-db:
   caddy-data:
+
+ # Shared with other compose setups that need to be reached from the reverse proxy
+networks:
+  my_network:
+    name: "my_network"
+
+# # Let other docker-compose files use the same network with:
+# networks:
+#   my_network:
+#     name: "my_network"
+#     external: true
