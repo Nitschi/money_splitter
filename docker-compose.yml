@@ -12,9 +12,11 @@ services:
       - caddy-data:/data
     environment:
       - DOMAIN
-    restart: unless-stopped
+      - BASIC_AUTH_USERNAME
+      - BASIC_AUTH_PASSWORD_HASHED
     networks:
       - my_network
+    restart: unless-stopped
 
   # Caddy Webserver for Flutter app
   flup_frontend:
@@ -40,10 +42,10 @@ services:
     hostname: flup_backend
     volumes:
       - sqlite-db:/backend/sqlite
-    ports:
-      - "55555:55555"
     working_dir: /backend
     command: ["dotnet", "run", "--project flup_backend"]
+    environment:
+      - DOMAIN
     networks:
       - my_network
     restart: unless-stopped

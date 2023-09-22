@@ -16,6 +16,19 @@ public class Program
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+        
+        var allowedDomain = builder.Configuration["DOMAIN"];
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowSpecificOrigin",
+                policy => policy.WithOrigins($"https://flup.{allowedDomain}")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            options.AddPolicy("DevelopmentPolicy",
+                policy => policy.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+        });
 
         var app = builder.Build();
 
@@ -27,11 +40,13 @@ public class Program
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
                 options.RoutePrefix = string.Empty;
             });
+            app.UseCors("DevelopmentPolicy");
         }
         else
         {
             app.UseHttpsRedirection();
             app.UseAuthorization();
+            app.UseCors("AllowSpecificOrigin");
         }
 
         app.MapControllers();
