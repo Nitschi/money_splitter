@@ -9,7 +9,7 @@ import '../models/person.dart';
 import '../models/transaction.dart';
 
 class MyAppState extends ChangeNotifier {
-  final apiClient = ApiClient(basePath: 'http://localhost:55555');
+  final apiClient = ApiClient(basePath: 'https://flup-backend.example.com:55555', authentication: HttpBasicAuth(username: "username", password: "password"));
   List<Expense> expenses = [];
   List<Person> members = [
     Person("24e6063b-3991-4b93-bdbd-63294168ffd2", "Alexander"),

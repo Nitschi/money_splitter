@@ -1,11 +1,19 @@
 cloud.{$DOMAIN} {
-	reverse_proxy nextcloud:80
+    reverse_proxy nextcloud:80
 }
 
 flup.{$DOMAIN} {
-	reverse_proxy flup_frontend:80
+    reverse_proxy flup_frontend:80
+
+    basicauth {
+        {$BASIC_AUTH_USERNAME} {$BASIC_AUTH_PASSWORD_HASHED}
+    }
 }
 
 flup-backend.{$DOMAIN} {
-	reverse_proxy flup_backend:55555
+    reverse_proxy flup_backend:55555
+
+    basicauth {
+        {$BASIC_AUTH_USERNAME} {$BASIC_AUTH_PASSWORD_HASHED}
+    }
 }
