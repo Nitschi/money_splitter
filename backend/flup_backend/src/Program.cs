@@ -34,18 +34,16 @@ public class Program
 
         if (app.Environment.IsDevelopment())
         {
+            app.UseCors("DevelopmentPolicy");
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
                 options.RoutePrefix = string.Empty;
             });
-            app.UseCors("DevelopmentPolicy");
         }
         else
         {
-            app.UseHttpsRedirection();
-            app.UseAuthorization();
             app.UseCors("AllowSpecificOrigin");
         }
 

@@ -3,16 +3,17 @@ cloud.{$DOMAIN} {
 }
 
 flup.{$DOMAIN} {
-    reverse_proxy flup_frontend:80
+    # Handle requests for /flup-backend
+    handle_path /flup-backend/* {
+        reverse_proxy flup_backend:55555
 
-    basicauth {
-        {$BASIC_AUTH_USERNAME} {$BASIC_AUTH_PASSWORD_HASHED}
+        basicauth {
+            {$BASIC_AUTH_USERNAME} {$BASIC_AUTH_PASSWORD_HASHED}
+        }
     }
-}
 
-flup-backend.{$DOMAIN} {
-    reverse_proxy flup_backend:55555
-
+    # Handle all other requests
+    reverse_proxy flup_frontend:80
     basicauth {
         {$BASIC_AUTH_USERNAME} {$BASIC_AUTH_PASSWORD_HASHED}
     }
