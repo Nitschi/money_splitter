@@ -29,11 +29,41 @@ class ExpensesPage extends StatelessWidget {
                 appState.removeExpense(expense);
               },
             ),
-            title: Text(
-                '${expense.title} for ${expense.price} ${expense.currency} paid by ${expense.paidBy.name} for ${expense.paidFor.map((p) {
-              return p.name;
-            })}'),
+            title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      '${expense.title}',
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  Text(
+                    '${expense.price} ${expense.currency}',
+                    textAlign: TextAlign.right,
+                  ),
+                ]),
+            subtitle: Row(children: [
+              Expanded(
+                child: Text('for ${expense.paidFor.map((p) {
+                  return p.name;
+                })}'),
+              ),
+              Text('paid by ${expense.paidBy.name}'),
+            ]),
           ),
+
+        // TODO: use circleavatar with first 2 letters for each user instead of name
+        /*CircleAvatar(
+                    backgroundColor: Colors.orange,
+                    child: Text(
+                      'Sun',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),*/
       ],
     );
   }
