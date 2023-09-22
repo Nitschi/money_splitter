@@ -4,6 +4,8 @@ cloud.{$DOMAIN} {
 
 flup.{$DOMAIN} {
 	reverse_proxy flup_frontend:80
+	# Avoid CORS issue when getting the token
+	reverse_proxy /nextcloud-proxy/* cloud.{$DOMAIN}
 }
 
 flup-backend.{$DOMAIN} {
