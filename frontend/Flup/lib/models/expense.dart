@@ -8,7 +8,7 @@ class Expense {
   Person paidBy;
   List<Person> paidFor;
 
-  final currency = "CHF";
+  final currency = "EUR";
 
   Expense(this.id, this.price, this.title, this.paidBy, this.paidFor);
 }

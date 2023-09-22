@@ -1,6 +1,7 @@
 import 'package:flup/pages/AddExpensePage.dart';
 import 'package:flup/pages/BalancePage.dart';
 import 'package:flup/pages/ExpensesPage.dart';
+import 'package:flup/pages/PaybackPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,6 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 2:
         page = BalancePage();
         break;
+      case 3:
+        page = PaybackPage();
+        break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -79,17 +83,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     icon: Icon(Icons.scale),
                     label: Text('Balance'),
                   ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.handshake),
+                    label: Text('Payback'),
+                  ),
                 ],
                 selectedIndex: selectedIndex,
                 onDestinationSelected: (value) {
                   setState(() {
                     selectedIndex = value;
                     switch (selectedIndex) {
-                      case 0: // Add Page                       
+                      case 0: // Add Page
                         break;
                       case 1: // Expenses Page
                       case 2: // Balance Page
                         appState.updateExpenses();
+                        break;
+                      case 3:
+                        appState.updateExpenses();
+                        appState.updatePayback();
                         break;
                       default:
                     }

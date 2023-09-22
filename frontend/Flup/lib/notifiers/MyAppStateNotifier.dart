@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flup_openapi_lib/api.dart';
 import 'package:flutter/material.dart';
 
 import '../mappers/expense_mapper.dart';
 import '../models/expense.dart';
 import '../models/person.dart';
+import '../models/transaction.dart';
 
 class MyAppState extends ChangeNotifier {
   final apiClient = ApiClient(basePath: 'http://localhost:55555');
@@ -19,6 +22,7 @@ class MyAppState extends ChangeNotifier {
   ];
 
   Map<Person, double> balance = {};
+  List<Transaction> payback = [];
 
   void setUpBalance() {
     for (var member in members) {
@@ -67,5 +71,68 @@ class MyAppState extends ChangeNotifier {
     expenses = ExpenseMapper.toExpenses(expenseDtos);
     calculateBalance();
     notifyListeners();
+  }
+
+  void updatePayback() {
+    payback = calculatePayback();
+    notifyListeners();
+  }
+
+  List<Transaction> calculatePayback() {
+    List<Transaction> payback = [];
+    var remainingBalance = Map<Person, double>.from(balance);
+    //separate members into debtors and sponsors
+    // get rid of members with balance 0
+    List<Person> debtors = [];
+    List<Person> sponsors = [];
+    for (var member in remainingBalance.keys) {
+      if (remainingBalance[member]! < 0) {
+        debtors.add(member);
+      } else if (remainingBalance[member]! > 0) {
+        sponsors.add(member);
+      }
+    }
+
+    while (remainingBalance.values.any((element) => element.abs() >= 0.001)) {
+      // find member with min debt and max credit
+      Person minDebtor = findMinDebtor(debtors, remainingBalance);
+      Person maxSponsor = findMaxSponsor(sponsors, remainingBalance);
+
+      //payback debt
+      var amount = min(
+          remainingBalance[minDebtor]!.abs(), remainingBalance[maxSponsor]!);
+
+      var transaction = Transaction(minDebtor, maxSponsor, amount);
+      payback.add(transaction);
+      remainingBalance[minDebtor] = remainingBalance[minDebtor]! + amount;
+      remainingBalance[maxSponsor] = remainingBalance[maxSponsor]! - amount;
+    }
+    return payback;
+  }
+
+  Person findMinDebtor(List<Person> debtors, var balance) {
+    // find member with min debt and max credit
+    double minDebt = double.negativeInfinity;
+    var memberWithMinDebt = debtors.first;
+    for (var member in debtors) {
+      if (balance[member]!.abs() > 0.001 && balance[member] > minDebt) {
+        minDebt = balance[member];
+        memberWithMinDebt = member;
+      }
+    }
+    return memberWithMinDebt;
+  }
+
+  Person findMaxSponsor(List<Person> sponsors, var balance) {
+    // find member with min debt and max credit
+    double maxCredit = double.negativeInfinity;
+    var memberWithMaxCredit = sponsors.first;
+    for (var member in sponsors) {
+      if (balance[member] > maxCredit) {
+        maxCredit = balance[member];
+        memberWithMaxCredit = member;
+      }
+    }
+    return memberWithMaxCredit;
   }
 }
