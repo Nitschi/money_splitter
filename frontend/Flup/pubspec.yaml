@@ -17,6 +17,7 @@ dependencies:
   uuid: ^3.0.7
   flup_openapi_lib:
     path: ../flup_openapi_lib
+  flutter_web_auth_2: ^2.2.1
 
 dev_dependencies:
   flutter_test:

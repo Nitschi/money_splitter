@@ -51,6 +51,7 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        manifestPlaceholders = [FRONTEND_ANDROID_OAUTH_CALLBACK_URL_SCHEME: "$process.env.FRONTEND_ANDROID_OAUTH_CALLBACK_URL_SCHEME"]
     }
 
     buildTypes {

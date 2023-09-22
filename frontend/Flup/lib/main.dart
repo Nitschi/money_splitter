@@ -1,3 +1,4 @@
+import 'package:flup/authentication/get_oauth2_token.dart';
 import 'package:flup/pages/AddExpensePage.dart';
 import 'package:flup/pages/BalancePage.dart';
 import 'package:flup/pages/ExpensesPage.dart';
@@ -8,6 +9,9 @@ import 'notifiers/AddPageState.dart';
 import 'notifiers/MyAppStateNotifier.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  var token = await OAuthTokenRetriever.getToken();
+  print(token);
   runApp(MyApp());
 }
 

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using flup_backend.Data;
 using flup_backend.Dtos;
 using flup_backend.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace flup_backend.Controllers;
 
@@ -22,6 +23,7 @@ public class ExpensesController : ControllerBase
         _mapper = mapper;
     }
 
+    [Authorize]
     [HttpGet(Name = "GetExpenses")]
     public IEnumerable<ExpenseDto> Get()
     {
@@ -33,6 +35,7 @@ public class ExpensesController : ControllerBase
         return _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
     }
 
+    [Authorize]
     [HttpPost(Name = "AddExpense")]
     public ActionResult<ExpenseDto> AddExpense(ExpenseDto expenseDto)
     {
@@ -57,6 +60,7 @@ public class ExpensesController : ControllerBase
         return CreatedAtAction(nameof(AddExpense), _mapper.Map<ExpenseDto>(expense));
     }
 
+    [Authorize]
     [HttpDelete(Name = "RemoveExpense")]
     public IActionResult RemoveExpense(ExpenseDto expenseDto)
     {
